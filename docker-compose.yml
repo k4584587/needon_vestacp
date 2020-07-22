@@ -1,0 +1,28 @@
+version: "3"
+
+services:
+  vesta:
+    image: k45845871/needon_vesta:latest
+    container_name: vesta
+    cap_add: ['NET_RAW', 'NET_ADMIN']
+    hostname: hirami.me
+    ulimits:
+      nproc: 65535
+      nofile:
+        soft: 20000
+        hard: 40000
+    sysctls:
+      net.core.somaxconn: '511'
+    volumes:
+      - "backup:/backup"
+      - "vesta:/vesta"
+      - "home:/home"
+    network_mode: "host"
+    labels:
+      - "Vesta Control Panel"
+    restart: always
+  
+volumes:
+  backup:
+  vesta:
+  home:
